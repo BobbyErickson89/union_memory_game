@@ -1,0 +1,13 @@
+.row {
+    /* setting font size because inline-block causes a weird margin-error
+    when  cloning our cards */
+    font-size: 0;
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    display: inline-block;
+    font-size: 15px;
+}
