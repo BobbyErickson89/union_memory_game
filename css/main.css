@@ -5,9 +5,25 @@
 }
 
 .card {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border: 1px solid black;
     display: inline-block;
     margin: 10px;
+    /* position relative is for centering the image in card */
+    /* must also have position absolute for .card img */
+    position: relative;
+}
+
+.card img {
+    height: 50%;
+    width: 50%;
+    /* position absolute is for centering the image in card */
+    /* must also have position relative for .card */
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
