@@ -1,3 +1,12 @@
+// will be used in flipCard.  Keeping track of how many times user has flipped cards.
+var first_card, second_card;
+var click_count = 0;
+
+// will be used in awardPoint.  Keeps track of player points.
+var player1 = 0;
+var player2 = 0;
+var gameTurn = 0;
+
 // function for shuffling the values in an array
 function shuffleArray(arr){
     var j, x, i;
@@ -56,9 +65,16 @@ function createBoard(){
     }
 }
 
-// will be used in flipCard.  Keeping track of how many times user has flipped cards.
-var click_count = 0;
-var first_card, second_card;
+function awardPoint(){
+    if(gameTurn % 2){
+        player1++;
+        $('#player1').text(player1);
+    }
+    else {
+        player2++;
+        $('#player2').text(player2);
+    }
+}
 
 function flipCard(){
     var card = $(this);
@@ -74,15 +90,15 @@ function flipCard(){
         //flipped_card is set to the image's data attribute
         var card_image = card.find('img').data('icon');
 
-
-        // if this is the first card flipped, we set the first_card variable to that icon
         if(click_count < 2){
             first_card = card_image;
         }
         // if this is the second card flipped, we check to see if the cards match
         else {
             second_card = card_image;
+            gameTurn++;
             if(second_card === first_card){
+                awardPoint();
                 //unbinding the click event
                 $('.effect_click').off('click', flipCard);
                 //removing the effect_click class, that way the matching cards cannot be clicked/flipped again.
@@ -94,8 +110,6 @@ function flipCard(){
             }
             // this else statement is fired when 2 cards have been flipped and they were not a match.
             else {
-                // This is unbinding our flipCard click event from all effect_click classes.
-                // It will stop users from being able to flip other cards during setTimeout.
                 $('.effect_click').off('click', flipCard);
 
                 setTimeout(function(){
