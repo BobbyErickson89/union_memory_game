@@ -1,3 +1,15 @@
+// function for shuffling the values in an array
+function shuffleArray(arr){
+    var j, x, i;
+    for (i = arr.length; i; i--) {
+        j = Math.floor(Math.random() * i);
+        x = arr[i - 1];
+        arr[i - 1] = arr[j];
+        arr[j] = x;
+    }
+}
+
+//creates a new, blank card board.  Is set off on page load and when users want to play a new game.
 function createBoard(){
 
     // cloning 5 cards into a row
@@ -9,8 +21,98 @@ function createBoard(){
     for(var i = 1; i < 4; i++){
         $('.row:first').clone().appendTo("#board");
     }
+
+    // this is the name of each one of our icons
+    var card_icons = [
+        "baseball",
+        "basketball",
+        "bowling",
+        "boxing",
+        "football",
+        "golf",
+        "hockey",
+        "ping_pong",
+        "soccer",
+        "tennis"
+    ];
+
+    //duplicating all of our icons since we will need 2.
+    card_icons = card_icons.concat(card_icons);
+
+    shuffleArray(card_icons);
+
+    for(var i = 0; i < card_icons.length; i++){
+        //creating an image tag to place in our card div
+        var image = '<img src="sports-icons/svg/' + card_icons[i] + '.svg" data-icon="' + card_icons[i] + '"/>';
+
+        // Going through each of our cards.  When we come across the first empty card,
+        // we will put that icon inside that card.
+        $('.back').each(function(){
+            if($(this).is(':empty')){
+                $(this).prepend(image);
+                return false
+            }
+        });
+    }
 }
 
+// will be used in flipCard.  Keeping track of how many times user has flipped cards.
+var click_count = 0;
+var first_card, second_card;
 
+function flipCard(){
+    var card = $(this);
+
+    //preventing users from flipping the same card
+    if(card.hasClass('flipped')){
+        return;
+    }
+    //once user has clicked card, we increase click_count and flip card
+    else {
+        click_count++;
+        card.addClass('flipped');
+        //flipped_card is set to the image's data attribute
+        var card_image = card.find('img').data('icon');
+
+
+        // if this is the first card flipped, we set the first_card variable to that icon
+        if(click_count < 2){
+            first_card = card_image;
+        }
+        // if this is the second card flipped, we check to see if the cards match
+        else {
+            second_card = card_image;
+            if(second_card === first_card){
+                //unbinding the click event
+                $('.effect_click').off('click', flipCard);
+                //removing the effect_click class, that way the matching cards cannot be clicked/flipped again.
+                $('.flipped').removeClass('effect_click');
+
+                click_count = 0;
+                //re-binding our flipCard event
+                $('.effect_click').on('click', flipCard);
+            }
+            // this else statement is fired when 2 cards have been flipped and they were not a match.
+            else {
+                // This is unbinding our flipCard click event from all effect_click classes.
+                // It will stop users from being able to flip other cards during setTimeout.
+                $('.effect_click').off('click', flipCard);
+
+                setTimeout(function(){
+                    $('.effect_click').removeClass('flipped');
+                    click_count = 0;
+                    // re-binding our flipCard click event to our cards.
+                    $('.effect_click').on('click', flipCard);
+                }, 1500);
+            }
+
+        }
+    }
+}
 
 createBoard();
+
+$('.effect_click').on('click', flipCard);
+
+
+
