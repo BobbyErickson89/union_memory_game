@@ -43,7 +43,7 @@ function createBoard(){
 
     for(var i = 0; i < card_icons.length; i++){
         //creating an image tag to place in our card div
-        var image = '<img src="sports-icons/svg/' + card_icons[i] + '.svg" data-image="' + card_icons[i] + '"/>';
+        var image = '<img src="sports-icons/svg/' + card_icons[i] + '.svg" data-icon="' + card_icons[i] + '"/>';
 
         // Going through each of our cards.  When we come across the first empty card,
         // we will put that icon inside that card.
@@ -58,6 +58,7 @@ function createBoard(){
 
 // will be used in flipCard.  Keeping track of how many times user has flipped cards.
 var click_count = 0;
+var first_card, second_card;
 
 function flipCard(){
     var card = $(this);
@@ -70,19 +71,41 @@ function flipCard(){
     else {
         click_count++;
         card.addClass('flipped');
+        //flipped_card is set to the image's data attribute
+        var card_image = card.find('img').data('icon');
 
-        //once user has clicked card twice, we use setTimeout() to flip cards back over after 2 seconds.
-        if(click_count >= 2){
-            // This is unbinding our flipCard click event from all effect_click classes.
-            // It will stop users from being able to flip other cards during setTimeout.
-            $('.effect_click').off('click', flipCard);
 
-            setTimeout(function(){
-                $('.flipped').removeClass('flipped');
+        // if this is the first card flipped, we set the first_card variable to that icon
+        if(click_count < 2){
+            first_card = card_image;
+        }
+        // if this is the second card flipped, we check to see if the cards match
+        else {
+            second_card = card_image;
+            if(second_card === first_card){
+                //unbinding the click event
+                $('.effect_click').off('click', flipCard);
+                //removing the effect_click class, that way the matching cards cannot be clicked/flipped again.
+                $('.flipped').removeClass('effect_click');
+
                 click_count = 0;
-                // re-binding our flipCard click event to our cards.
+                //re-binding our flipCard event
                 $('.effect_click').on('click', flipCard);
-            }, 3000);
+            }
+            // this else statement is fired when 2 cards have been flipped and they were not a match.
+            else {
+                // This is unbinding our flipCard click event from all effect_click classes.
+                // It will stop users from being able to flip other cards during setTimeout.
+                $('.effect_click').off('click', flipCard);
+
+                setTimeout(function(){
+                    $('.effect_click').removeClass('flipped');
+                    click_count = 0;
+                    // re-binding our flipCard click event to our cards.
+                    $('.effect_click').on('click', flipCard);
+                }, 1500);
+            }
+
         }
     }
 }
