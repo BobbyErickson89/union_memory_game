@@ -21,6 +21,18 @@ function shuffleArray(arr){
 //creates a new, blank card board.  Is set off on page load and when users want to play a new game.
 function createBoard(){
 
+    // creating our basic row
+    var empty_row =
+        "<div class='row'>" +
+            "<div class='card effect_click'>" +
+                "<div class='front'></div>" +
+                "<div class='back'></div>" +
+            "</div>" +
+        "</div>";
+
+    // placing that row in our board
+    $('#board').append(empty_row);
+
     // cloning 5 cards into a row
     for(var i = 1; i < 5; i++){
         $('.card:first').clone().appendTo('.row');
@@ -119,14 +131,34 @@ function flipCard(){
                     $('.effect_click').on('click', flipCard);
                 }, 1500);
             }
-
         }
     }
 }
 
-createBoard();
+function newGame(){
+    // re-setting our variables
+    var first_card = null;
+    var second_card = null;
+    var click_count = 0;
+    var player1 = 0;
+    var player2 = 0;
+    var gameTurn = 0;
 
-$('.effect_click').on('click', flipCard);
+    // reset our board and the player's scores.
+    $('#board').empty();
+    $('.player-score').empty();
+
+    // re-create board and bind flipCard click event
+    createBoard();
+    $('.effect_click').on('click', flipCard);
+}
+
+$(document).ready(function(){
+    createBoard();
+    $('.effect_click').on('click', flipCard);
+    $('#new-game').on('click', newGame);
+});
+
 
 
 
