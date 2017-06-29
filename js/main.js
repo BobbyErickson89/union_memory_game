@@ -137,12 +137,12 @@ function flipCard(){
 
 function newGame(){
     // re-setting our variables
-    var first_card = null;
-    var second_card = null;
-    var click_count = 0;
-    var player1 = 0;
-    var player2 = 0;
-    var gameTurn = 0;
+    first_card = null;
+    second_card = null;
+    click_count = 0;
+    player1 = 0;
+    player2 = 0;
+    gameTurn = 0;
 
     // reset our board and the player's scores.
     $('#board').empty();
