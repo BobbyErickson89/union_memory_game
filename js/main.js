@@ -1,4 +1,5 @@
-// will be used in flipCard.  Keeping track of how many times user has flipped cards.
+/////// VARIABLES //////
+
 var first_card, second_card;
 var click_count = 0;
 
@@ -6,6 +7,11 @@ var click_count = 0;
 var player1 = 0;
 var player2 = 0;
 var gameTurn = 0;
+
+
+
+
+//////// FUNCTIONS ///////
 
 // function for shuffling the values in an array
 function shuffleArray(arr){
