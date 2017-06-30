@@ -1,3 +1,12 @@
+body {
+    font-family: sans-serif;
+}
+
+section {
+    display: inline-block;
+    vertical-align: top;
+}
+
 .row {
     /* setting font size because inline-block causes a weird margin-error
     when  cloning our cards */
@@ -7,7 +16,8 @@
 .card {
     width: 120px;
     height: 120px;
-    border: 1px solid black;
+    border: 2px solid #444;
+
     display: inline-block;
     margin: 10px;
     /* position relative is for centering the image in card */
@@ -41,7 +51,7 @@
 }
 
 .front {
-    background-color: lightblue;
+    background-color: #00aced;
 }
 
 .back {
@@ -81,4 +91,18 @@
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+.blue-player {
+    color: blue;
+}
+
+.red-player {
+    color: red;
+}
+
+#scoreboard {
+    margin: 25px;
+    width: 300px;
+    font-size: 1.5em;
 }
