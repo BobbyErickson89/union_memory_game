@@ -1,12 +1,12 @@
 /////// VARIABLES //////
 
-var first_card, second_card;
-var click_count = 0;
+let first_card, second_card;
+let click_count = 0;
 
 // will be used in awardPoint.  Keeps track of player points.
-var player1 = 0;
-var player2 = 0;
-var gameTurn = 0;
+let player1 = 0;
+let player2 = 0;
+let gameTurn = 0;
 
 
 
@@ -15,7 +15,7 @@ var gameTurn = 0;
 
 // function for shuffling the values in an array
 function shuffleArray(arr){
-    var j, x, i;
+    let j, x, i;
     for (i = arr.length; i; i--) {
         j = Math.floor(Math.random() * i);
         x = arr[i - 1];
@@ -28,7 +28,7 @@ function shuffleArray(arr){
 function createBoard(){
 
     // creating our basic row
-    var empty_row =
+    let empty_row =
         "<div class='row'>" +
             "<div class='card effect_click'>" +
                 "<div class='front'></div>" +
@@ -40,17 +40,17 @@ function createBoard(){
     $('#board').append(empty_row);
 
     // cloning 5 cards into a row
-    for(var i = 1; i < 5; i++){
+    for(let i = 1; i < 5; i++){
         $('.card:first').clone().appendTo('.row');
     }
 
     // after cards are cloned into a row, we are cloning 4 rows.
-    for(var i = 1; i < 4; i++){
+    for(let i = 1; i < 4; i++){
         $('.row:first').clone().appendTo("#board");
     }
 
     // this is the name of each one of our icons
-    var card_icons = [
+    let card_icons = [
         "baseball",
         "basketball",
         "bowling",
@@ -68,9 +68,9 @@ function createBoard(){
 
     shuffleArray(card_icons);
 
-    for(var i = 0; i < card_icons.length; i++){
+    for(let i = 0; i < card_icons.length; i++){
         //creating an image tag to place in our card div
-        var image = '<img src="sports-icons/svg/' + card_icons[i] + '.svg" data-icon="' + card_icons[i] + '"/>';
+        let image = '<img src="sports-icons/svg/' + card_icons[i] + '.svg" data-icon="' + card_icons[i] + '"/>';
 
         // Going through each of our cards.  When we come across the first empty card,
         // we will put that icon inside that card.
@@ -95,7 +95,7 @@ function awardPoint(){
 }
 
 function flipCard(){
-    var card = $(this);
+    let card = $(this);
 
     //preventing users from flipping the same card
     if(card.hasClass('flipped')){
