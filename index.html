@@ -9,21 +9,25 @@
     <!-- my original CSS files -->
     <link href="css/main.css" rel="stylesheet">
 </head>
+
+<header>
+    <h1 id="header-title">Memory Game</h1>
+
+    <div id="scoreboard">
+        <div class="blue-player">
+            Player 1: <span id="player1" class="player-score"></span>
+        </div>
+
+        <div class="red-player">
+            Player 2: <span id="player2" class="player-score"></span>
+        </div>
+
+        <button id="new-game">New Game</button>
+    </div>
+</header>
+
 <body>
-
-<section id="board"></section>
-
-<section id="scoreboard">
-    <div class="blue-player">
-        Player 1: <span id="player1" class="player-score"></span>
-    </div>
-
-    <div class="red-player">
-        Player 2: <span id="player2" class="player-score"></span>
-    </div>
-
-    <button id="new-game">New Game</button>
-</section>
+    <section id="board"></section>
 
     <!-- my original JS files -->
     <script src="js/main.js"></script>
