@@ -2,9 +2,30 @@ body {
     font-family: sans-serif;
 }
 
-section {
+header {
+    margin-bottom: 50px;
+    text-align: center;
+    width: 90%;
+}
+
+/***** Header & Score ******/
+#header-title {
     display: inline-block;
-    vertical-align: top;
+}
+
+#scoreboard {
+    margin: 25px;
+    width: 300px;
+    /*font-size: 1.5em;*/
+
+    display: inline-block;
+    float: right;
+}
+
+
+/****** Board ******/
+#board {
+    text-align: center;
 }
 
 .row {
@@ -16,7 +37,7 @@ section {
 .card {
     width: 120px;
     height: 120px;
-    border: 2px solid #444;
+    border: 1px solid #444;
 
     display: inline-block;
     margin: 10px;
@@ -35,9 +56,7 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-}
 
-.front, .back {
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     -ms-backface-visibility: hidden;
@@ -48,6 +67,10 @@ section {
     -ms-transition: transform 0.3s;
     -o-transition: transform 0.3s;
     transition: transform 0.3s;
+}
+
+.card, .front, .back {
+    border-radius: 10px;
 }
 
 .front {
@@ -99,10 +122,4 @@ section {
 
 .red-player {
     color: red;
-}
-
-#scoreboard {
-    margin: 25px;
-    width: 300px;
-    font-size: 1.5em;
 }
