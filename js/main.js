@@ -116,7 +116,7 @@ function flipCard(){
             second_card = card_image;
             gameTurn++;
             if(second_card === first_card){
-                awardPoint();
+                // awardPoint();  Commenting out awardPoint because we're disabling 2 player for now.
                 //unbinding the click event
                 $('.effect_click').off('click', flipCard);
                 //removing the effect_click class, that way the matching cards cannot be clicked/flipped again.
