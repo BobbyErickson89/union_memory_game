@@ -1,7 +1,8 @@
 /////// VARIABLES //////
 
-let first_card, second_card;
-let click_count = 0;
+let first_card, second_card, timer;
+let turn_clicks = 0;
+let total_clicks = 0;
 
 // will be used in awardPoint.  Keeps track of player points.
 let player1 = 0;
@@ -95,20 +96,26 @@ function awardPoint(){
 }
 
 function flipCard(){
+    total_clicks++;
+
+    if(total_clicks === 1){
+        startTimer();
+    }
     let card = $(this);
 
     //preventing users from flipping the same card
     if(card.hasClass('flipped')){
         return;
     }
-    //once user has clicked card, we increase click_count and flip card
+    //once user has clicked card, we increase turn_clicks and flip card
     else {
-        click_count++;
+        turn_clicks++;
+        console.log(turn_clicks);
         card.addClass('flipped');
         //flipped_card is set to the image's data attribute
         var card_image = card.find('img').data('icon');
 
-        if(click_count < 2){
+        if(turn_clicks < 2){
             first_card = card_image;
         }
         // if this is the second card flipped, we check to see if the cards match
@@ -122,7 +129,7 @@ function flipCard(){
                 //removing the effect_click class, that way the matching cards cannot be clicked/flipped again.
                 $('.flipped').removeClass('effect_click');
 
-                click_count = 0;
+                turn_clicks = 0;
                 //re-binding our flipCard event
                 $('.effect_click').on('click', flipCard);
             }
@@ -132,7 +139,7 @@ function flipCard(){
 
                 setTimeout(function(){
                     $('.effect_click').removeClass('flipped');
-                    click_count = 0;
+                    turn_clicks = 0;
                     // re-binding our flipCard click event to our cards.
                     $('.effect_click').on('click', flipCard);
                 }, 1500);
@@ -141,11 +148,28 @@ function flipCard(){
     }
 }
 
+function startTimer(){
+    // we're using Date.now() instead of 0, because setInterval can be unreliable and not fire precisely.
+    // Date.now() allows us to keep track of the exact millisecond we started, and the elapsed time it has
+    // been whenever setInterval does fire.
+    let start_time = Date.now();
+
+    setInterval(function(){
+        let elapsed_time = Date.now();
+
+        timer = Math.floor((elapsed_time - start_time) / 1000);
+        console.log(timer);
+    }, 1000);
+
+
+}
+
 function newGame(){
     // re-setting our variables
     first_card = null;
     second_card = null;
-    click_count = 0;
+    turn_clicks = 0;
+    total_clicks = 0;
     player1 = 0;
     player2 = 0;
     gameTurn = 0;
