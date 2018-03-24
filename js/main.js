@@ -110,7 +110,6 @@ function flipCard(){
     //once user has clicked card, we increase turn_clicks and flip card
     else {
         turn_clicks++;
-        console.log(turn_clicks);
         card.addClass('flipped');
         //flipped_card is set to the image's data attribute
         var card_image = card.find('img').data('icon');
@@ -156,9 +155,18 @@ function startTimer(){
 
     setInterval(function(){
         let elapsed_time = Date.now();
+        let minutes = 0;
+        let seconds = Math.floor((elapsed_time - start_time) / 1000);
 
-        timer = Math.floor((elapsed_time - start_time) / 1000);
-        console.log(timer);
+        if(seconds > 59){
+            minutes = Math.floor(seconds / 60);
+            seconds = seconds % 60;
+        }
+
+        minutes = ("0" + minutes).slice(-2);
+        seconds = ("0" + seconds).slice(-2);
+
+        $('#timer').text(minutes + ':' + seconds);
     }, 1000);
 
 

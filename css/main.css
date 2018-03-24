@@ -1,28 +1,13 @@
 body {
-    font-family: sans-serif;
+    font-family: 'Press Start 2P', sans-serif;
+    color: white;
     background-color: #00aced;
 }
 
 header {
     margin-bottom: 50px;
     text-align: center;
-    width: 90%;
 }
-
-/***** Header & Score ******/
-#header-title {
-    display: inline-block;
-}
-
-#scoreboard {
-    margin: 25px;
-    width: 300px;
-    /*font-size: 1.5em;*/
-
-    display: inline-block;
-    float: right;
-}
-
 
 /****** Board ******/
 #board {
