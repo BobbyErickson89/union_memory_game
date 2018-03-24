@@ -3,6 +3,7 @@
 let first_card, second_card, timer;
 let turn_clicks = 0;
 let total_clicks = 0;
+let lives = 12;
 
 // will be used in awardPoint.  Keeps track of player points.
 let player1 = 0;
@@ -71,7 +72,7 @@ function createBoard(){
 
     for(let i = 0; i < card_icons.length; i++){
         //creating an image tag to place in our card div
-        let image = '<img src="sports-icons/svg/' + card_icons[i] + '.svg" data-icon="' + card_icons[i] + '"/>';
+        let image = '<img src="images/sports-icons/svg/' + card_icons[i] + '.svg" data-icon="' + card_icons[i] + '"/>';
 
         // Going through each of our cards.  When we come across the first empty card,
         // we will put that icon inside that card.
@@ -81,6 +82,18 @@ function createBoard(){
                 return false
             }
         });
+    }
+
+    renderLives();
+}
+
+function renderLives(){
+    $('#lives').empty();
+
+    for(let i = 0; i < lives; i++){
+        let heart = '<img class="hearts" src="images/heart.svg" />';
+
+        $('#lives').prepend(heart);
     }
 }
 
@@ -141,7 +154,17 @@ function flipCard(){
                     turn_clicks = 0;
                     // re-binding our flipCard click event to our cards.
                     $('.effect_click').on('click', flipCard);
-                }, 1500);
+                }, 1000);
+
+                // since the user guessed wrong, we are removing one life/heart.  If the user is at zero lives, we
+                // give them a game over alert and start a new game.
+                lives--;
+                if(lives > 0){
+                    $('#lives .hearts:last').remove();
+                } else {
+                    alert('Game Over!');
+                    newGame();
+                }
             }
         }
     }
@@ -168,8 +191,6 @@ function startTimer(){
 
         $('#timer').text(minutes + ':' + seconds);
     }, 1000);
-
-
 }
 
 function newGame(){

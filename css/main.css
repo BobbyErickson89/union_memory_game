@@ -9,6 +9,27 @@ header {
     text-align: center;
 }
 
+/****** Game Stats ******/
+#header-stats {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#timer {
+    float: right;
+}
+
+#lives {
+    float: left;
+}
+
+.hearts {
+    height: 20px;
+    width: 20px;
+    padding: 1px;
+}
+
 /****** Board ******/
 #board {
     text-align: center;
